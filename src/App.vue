@@ -5,6 +5,7 @@
       <span class="normal">Jobs</span>
     </h1>
     <router-view />
+    <div class="footer">Nicole Bullecer @ DevChallenges.io</div>
   </mdb-container>
 </template>
 
@@ -20,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@300;500;700&family=Roboto:wght@400;500;700&display=swap");
 
 body {
   background: #f6f7fb !important;
@@ -53,13 +54,27 @@ i {
   font-family: "Roboto", sans-serif;
 }
 
-.nav-brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 2rem 0;
+#app {
+  position: relative;
+  min-height: calc(100vh + 70px);
 
-  .normal {
-    font-weight: 300;
+  .nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 2rem 0;
+
+    .normal {
+      font-weight: 300;
+    }
+  }
+
+  .footer {
+    margin-bottom: 70px;
+    color: $secondary;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
   }
 }
 
