@@ -63,13 +63,25 @@ i {
 }
 
 // COLORS
+.color-primary {
+  background: transparent !important;
+  border: 1px solid $primary;
+  color: $primary;
+}
+
+.color-secondary {
+  background-color: transparent;
+  border: 1px solid $secondary !important;
+  color: $secondary !important;
+}
+
 .color-info {
   background-color: $info !important;
   color: #fff !important;
+  border: 1px solid $info !important;
 
   .alt {
     background-color: transparent !important;
-    border: 1px solid $info !important;
     color: $info !important;
   }
 }
