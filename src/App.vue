@@ -23,9 +23,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Roboto:wght@400;500;700&display=swap");
 
 body {
-  font-size: 0.875rem;
+  background: #f6f7fb !important;
   color: $primary;
   font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
 }
 
 h1,
@@ -40,7 +41,7 @@ h1 {
 h6 {
   color: $secondary;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 700 !important;
   text-transform: uppercase;
 }
 
