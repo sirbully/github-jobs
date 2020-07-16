@@ -63,6 +63,44 @@ i {
   }
 }
 
+.pagination {
+  float: right;
+  margin-top: 32px;
+
+  li {
+    &.active {
+      .pagination-item {
+        background: $info !important;
+        color: #fff !important;
+        border: 1px solid $info !important;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .pagination-item {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $secondary;
+    font-family: Roboto, sans-serif;
+    border: 1px solid $secondary;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      color: $info;
+      border: 1px solid $info;
+    }
+  }
+}
+
 // COLORS
 .color-primary {
   background: transparent !important;

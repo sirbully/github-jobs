@@ -9,7 +9,6 @@
         </mdb-col>
       </mdb-row>
     </div>
-
     <div class="job-list-wrap">
       <mdb-row>
         <mdb-col sm="4" class="filter-wrap">
@@ -46,6 +45,19 @@
               :location="job.location"
               :created="job.created_at"
             />
+
+            <paginate
+              :page-count="10"
+              :page-range="3"
+              :click-handler="goToPage"
+              :prev-text="'<i class=\'material-icons\'>keyboard_arrow_left</i>'"
+              :next-text="'<i class=\'material-icons\'>keyboard_arrow_right</i>'"
+              :container-class="'pagination'"
+              :page-link-class="'pagination-item'"
+              :prev-link-class="'pagination-item'"
+              :next-link-class="'pagination-item'"
+              :hide-prev-next="true"
+            ></paginate>
           </div>
         </mdb-col>
       </mdb-row>
@@ -75,6 +87,7 @@ export default {
     return {
       loading: false,
       jobs: [],
+      page: 1,
     };
   },
   created() {
@@ -91,8 +104,10 @@ export default {
         .then((data) => {
           this.loading = false;
           this.jobs = data;
-          console.log(data);
         });
+    },
+    goToPage(pageNum) {
+      this.page = pageNum;
     },
   },
   setup() {
