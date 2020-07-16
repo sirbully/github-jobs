@@ -20,6 +20,7 @@ export default {
 <style lang="scss" scoped>
 label {
   position: relative;
+  max-width: fit-content;
 }
 
 div {

@@ -75,6 +75,11 @@ export default {
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  transition: all linear 0.25s;
+
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .job-position-wrap {
