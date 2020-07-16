@@ -35,7 +35,7 @@
 
           <div v-if="!loading">
             <job-card
-              v-for="job in jobs"
+              v-for="job in jobPages"
               :key="job.id"
               :id="job.id"
               :company="job.company"
@@ -46,18 +46,7 @@
               :created="job.created_at"
             />
 
-            <paginate
-              :page-count="10"
-              :page-range="3"
-              :click-handler="goToPage"
-              :prev-text="'<i class=\'material-icons\'>keyboard_arrow_left</i>'"
-              :next-text="'<i class=\'material-icons\'>keyboard_arrow_right</i>'"
-              :container-class="'pagination'"
-              :page-link-class="'pagination-item'"
-              :prev-link-class="'pagination-item'"
-              :next-link-class="'pagination-item'"
-              :hide-prev-next="true"
-            ></paginate>
+            <pagination :items="jobs" :pageSize="5" :maxPages="3" @changePage="goToPage" />
           </div>
         </mdb-col>
       </mdb-row>
@@ -69,6 +58,7 @@
 import { ref } from '@vue/composition-api';
 import Checkbox from '@/components/Checkbox.vue';
 import JobCard from '@/components/JobCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 import {
   mdbRow, mdbCol, mdbBtn,
@@ -82,12 +72,14 @@ export default {
     mdbBtn,
     Checkbox,
     JobCard,
+    Pagination,
   },
   data() {
     return {
       loading: false,
+      show: false,
       jobs: [],
-      page: 1,
+      jobPages: [],
     };
   },
   created() {
@@ -103,11 +95,14 @@ export default {
       }).then((response) => response.json())
         .then((data) => {
           this.loading = false;
+          this.show = true;
           this.jobs = data;
         });
     },
-    goToPage(pageNum) {
-      this.page = pageNum;
+    goToPage(jobPages) {
+      this.jobPages = jobPages;
+
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     },
   },
   setup() {
@@ -195,9 +190,13 @@ export default {
   }
 }
 
-.spinner-color {
-  border: 0.25em solid $primary !important;
-  border-right-color: transparent !important;
+.jobs-wrap {
+  margin-bottom: 4rem;
+
+  .spinner-color {
+    border: 0.25em solid $primary !important;
+    border-right-color: transparent !important;
+  }
 }
 
 @media (max-width: 575px) {
