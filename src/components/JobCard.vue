@@ -53,6 +53,7 @@ export default {
 <style lang="scss" scoped>
 .job-card {
   padding: 12px;
+  margin-bottom: 32px;
   display: flex;
   justify-content: space-between;
   font-family: "Roboto", sans-serif;
