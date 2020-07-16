@@ -9,6 +9,7 @@
         </mdb-col>
       </mdb-row>
     </div>
+
     <div class="job-list-wrap">
       <mdb-row>
         <mdb-col sm="4" class="filter-wrap">
@@ -185,8 +186,7 @@ export default {
   .filter-location {
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
-    margin-left: 5px;
+    margin: 25px 0 25px 5px;
   }
 }
 
