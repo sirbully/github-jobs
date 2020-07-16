@@ -12,7 +12,7 @@
 
     <div class="job-list-wrap">
       <mdb-row>
-        <mdb-col col="4" class="filter-wrap">
+        <mdb-col sm="4" class="filter-wrap">
           <checkbox v-model="fullTime" name="Full time" />
           <h6>Location</h6>
           <div class="search-input-wrap location">
@@ -27,16 +27,26 @@
           </div>
         </mdb-col>
 
-        <mdb-col col="8" class="jobs-wrap">
-          <job-card
-            id="9999f1f0-e448-11e8-966e-602e38acf303"
-            company="BlueVine"
-            title="Senior Python Developer"
-            logo="https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcVpXIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8b6025c5a6fe7b1fcfa4d8ead233a6ef0e956a5a/98456b19-f8cb-4e7c-863d-6dafefc20196"
-            :isFullTime="true"
-            location="Redwood City, Ca"
-            created="Fri Nov 09 21:36:14 UTC 2018"
-          />
+        <mdb-col sm="8" class="jobs-wrap">
+          <div v-if="loading" class="d-flex justify-content-center">
+            <div class="spinner-border spinner-color" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
+          <div v-if="!loading">
+            <job-card
+              v-for="job in jobs"
+              :key="job.id"
+              :id="job.id"
+              :company="job.company"
+              :title="job.title"
+              :logo="job.company_logo"
+              :isFullTime="job.type === 'Full Time' ? true : false"
+              :location="job.location"
+              :created="job.created_at"
+            />
+          </div>
         </mdb-col>
       </mdb-row>
     </div>
@@ -60,6 +70,30 @@ export default {
     mdbBtn,
     Checkbox,
     JobCard,
+  },
+  data() {
+    return {
+      loading: false,
+      jobs: [],
+    };
+  },
+  created() {
+    this.fetchJobs();
+  },
+  methods: {
+    fetchJobs() {
+      this.loading = true;
+      fetch('https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json', {
+        headers: {
+          Origin: null,
+        },
+      }).then((response) => response.json())
+        .then((data) => {
+          this.loading = false;
+          this.jobs = data;
+          console.log(data);
+        });
+    },
   },
   setup() {
     const fullTime = ref(false);
@@ -96,7 +130,6 @@ export default {
 
 .search-input-wrap {
   padding: 4px;
-  max-width: 790px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,6 +137,7 @@ export default {
   border-radius: 4px;
 
   &.search {
+    max-width: 790px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -146,9 +180,16 @@ export default {
   }
 }
 
+.spinner-color {
+  border: 0.25em solid $primary !important;
+  border-right-color: transparent !important;
+}
+
 @media (max-width: 575px) {
   .search-input-wrap {
-    max-width: 315px;
+    &.search {
+      max-width: 315px;
+    }
 
     .search-btn {
       width: 104px;
