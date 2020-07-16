@@ -1,8 +1,9 @@
 <template>
   <div class="job-card">
     <div class="job-position-wrap">
-      <div class="company-logo">
-        <img :src="logo" :alt="company" />
+      <div v-if="logo !== null" class="company-logo" :style="companyLogo"></div>
+      <div v-else class="company-logo not-found">
+        <span>not found</span>
       </div>
       <div class="job-position">
         <h5>{{company}}</h5>
@@ -39,12 +40,23 @@ export default {
     location: String,
     created: String,
   },
+  data() {
+    return {
+      companyLogo: {
+        background: `url(${this.logo})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      },
+    };
+  },
   components: {
     Pill,
   },
   computed: {
     posted_on() {
-      return formatDistanceToNow(new Date(this.created));
+      return formatDistanceToNow(new Date(this.created),
+        { addSuffix: true });
     },
   },
 };
@@ -52,6 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 .job-card {
+  position: relative;
   padding: 12px;
   margin-bottom: 32px;
   display: flex;
@@ -68,7 +81,7 @@ export default {
   display: flex;
 
   .company-logo {
-    width: 90px;
+    min-width: 90px;
     height: 90px;
     border-radius: 4px;
     overflow: hidden;
@@ -76,8 +89,13 @@ export default {
     align-items: center;
     margin-right: 16px;
 
-    img {
-      width: 100%;
+    &.not-found {
+      background: #f2f2f2;
+      color: #bdbdbd;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
     }
   }
 
@@ -98,7 +116,9 @@ export default {
 
 .job-details-wrap {
   color: $secondary;
-  align-self: flex-end;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
   display: flex;
 
   span {
@@ -112,6 +132,14 @@ export default {
 
     &:first-child {
       margin-right: 28px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .job-position {
+    h4 {
+      font-size: 16px;
     }
   }
 }
