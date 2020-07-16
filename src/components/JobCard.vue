@@ -1,7 +1,7 @@
 <template>
   <div class="job-card">
     <div class="job-position-wrap">
-      <div v-if="logo !== null" class="company-logo" :style="companyLogo"></div>
+      <div v-if="logo" class="company-logo" :style="companyLogo"></div>
       <div v-else class="company-logo not-found">
         <span>not found</span>
       </div>
