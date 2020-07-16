@@ -27,15 +27,26 @@
           </div>
         </mdb-col>
 
-        <mdb-col col="8" class="jobs-wrap">Jobs</mdb-col>
+        <mdb-col col="8" class="jobs-wrap">
+          <job-card
+            id="9999f1f0-e448-11e8-966e-602e38acf303"
+            company="BlueVine"
+            title="Senior Python Developer"
+            logo="https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcVpXIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8b6025c5a6fe7b1fcfa4d8ead233a6ef0e956a5a/98456b19-f8cb-4e7c-863d-6dafefc20196"
+            :isFullTime="true"
+            location="Redwood City, Ca"
+            created="Fri Nov 09 21:36:14 UTC 2018"
+          />
+        </mdb-col>
       </mdb-row>
     </div>
   </div>
 </template>
 
 <script>
-import Checkbox from '@/components/Checkbox.vue';
 import { ref } from '@vue/composition-api';
+import Checkbox from '@/components/Checkbox.vue';
+import JobCard from '@/components/JobCard.vue';
 
 import {
   mdbRow, mdbCol, mdbBtn,
@@ -48,6 +59,7 @@ export default {
     mdbCol,
     mdbBtn,
     Checkbox,
+    JobCard,
   },
   setup() {
     const fullTime = ref(false);
