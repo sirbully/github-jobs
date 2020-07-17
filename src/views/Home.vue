@@ -107,7 +107,7 @@ export default {
       const queryStr = [];
       const loc = [];
 
-      if (this.search) queryStr.push(`search=${this.search}`);
+      if (this.search) queryStr.push(`search=${this.search.split(' ').join('+')}`);
 
       if (this.location) loc.push(this.location.split(' ').join('+'));
       if (this.remote) loc.push('remote');
