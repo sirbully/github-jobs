@@ -99,6 +99,7 @@ export default {
 <style lang="scss" scoped>
 .job {
   flex: 1;
+  margin-bottom: 50px;
 
   .go-back {
     display: flex;
