@@ -21,6 +21,7 @@ export default {
 label {
   position: relative;
   max-width: fit-content;
+  cursor: pointer;
 }
 
 div {
