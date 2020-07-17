@@ -1,9 +1,9 @@
 <template>
   <mdb-container id="app">
-    <h1 class="nav-brand">
+    <router-link to="/" class="nav-brand">
       Github
       <span class="normal">Jobs</span>
-    </h1>
+    </router-link>
     <router-view />
     <div class="footer">Nicole Bullecer @ DevChallenges.io</div>
   </mdb-container>
@@ -30,20 +30,20 @@ body {
   font-size: 0.875rem;
 }
 
-h1,
 h6 {
   font-family: "Poppins", sans-serif;
-}
-
-h1 {
-  color: $dark;
-}
-
-h6 {
   color: $secondary;
   font-size: 14px;
   font-weight: 700 !important;
   text-transform: uppercase;
+}
+
+a {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none !important;
+  }
 }
 
 i {
@@ -55,17 +55,30 @@ i {
 }
 
 #app {
-  position: relative;
-  min-height: calc(100vh + 70px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   .nav-brand {
+    color: $dark;
+    font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     margin: 2rem 0;
+    width: fit-content;
 
     .normal {
       font-weight: 300;
     }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .spinner-color {
+    border: 0.25em solid $primary !important;
+    border-right-color: transparent !important;
   }
 
   .footer {
