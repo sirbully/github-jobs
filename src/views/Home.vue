@@ -29,23 +29,27 @@
 
         <mdb-col sm="8" class="jobs-wrap">
           <div v-if="loading" class="d-flex justify-content-center">
-            <div class="spinner-border spinner-color" role="status">
+            <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
 
           <div v-if="!loading">
-            <job-card
+            <router-link
               v-for="job in jobPages"
               :key="job.id"
-              :id="job.id"
-              :company="job.company"
-              :title="job.title"
-              :logo="job.company_logo"
-              :isFullTime="job.type === 'Full Time' ? true : false"
-              :location="job.location"
-              :created="job.created_at"
-            />
+              :to="{ name: 'Job', params: { id: job.id }}"
+            >
+              <job-card
+                :id="job.id"
+                :company="job.company"
+                :title="job.title"
+                :logo="job.company_logo"
+                :isFullTime="job.type === 'Full Time' ? true : false"
+                :location="job.location"
+                :created="job.created_at"
+              />
+            </router-link>
 
             <pagination :items="jobs" :pageSize="5" :maxPages="3" @changePage="goToPage" />
           </div>
@@ -120,6 +124,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  flex: 1;
+}
+
 .search-wrap {
   height: 54x;
   padding: 42px 18px;
@@ -192,11 +200,6 @@ export default {
 
 .jobs-wrap {
   margin-bottom: 4rem;
-
-  .spinner-color {
-    border: 0.25em solid $primary !important;
-    border-right-color: transparent !important;
-  }
 }
 
 @media (max-width: 575px) {
