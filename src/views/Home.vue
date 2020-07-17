@@ -109,7 +109,7 @@ export default {
 
       if (this.search) queryStr.push(`search=${this.search}`);
 
-      if (this.location) loc.push(this.location);
+      if (this.location) loc.push(this.location.split(' ').join('+'));
       if (this.remote) loc.push('remote');
       if (this.amsterdam) loc.push('amsterdam');
       if (this.germany) loc.push('germany');
