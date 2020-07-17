@@ -1,6 +1,6 @@
 # Github Jobs
 
-(Dev Challenges)[https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps]
+[Dev Challenges](https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps)
 
 ![GitHub Jobs Dev Challenges](https://firebasestorage.googleapis.com/v0/b/devchallenges-1234.appspot.com/o/challengesDesigns%2FJobSearchThumbnail.png?alt=media&token=59d40095-f280-478f-a8c9-dc9d49f14471)
 
