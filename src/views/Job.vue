@@ -2,9 +2,11 @@
   <div class="job">
     <mdb-row>
       <mdb-col sm="3">
-        <router-link to="/">Back to search</router-link>
+        <router-link to="/" class="go-back">
+          <i class="material-icons">trending_flat</i> Back to search
+        </router-link>
         <h6>How to apply</h6>
-        <!-- <div class="job-apply" v-html="job.how_to_apply"></div> -->
+        <div class="job-apply" v-html="job.how_to_apply"></div>
       </mdb-col>
 
       <mdb-col v-if="!loading" sm="9">
@@ -12,16 +14,22 @@
           <h2>{{job.title}}</h2>
           <pill v-if="job.type === 'Full Time'" class="pill" />
         </div>
-        <span class="job-date">{{posted_on}}</span>
+        <span class="job-date">
+          <i class="material-icons">access_time</i>
+          {{posted_on}}
+        </span>
 
         <div class="job-employer">
           <div v-if="job.company_logo" class="company-logo" :style="companyLogo"></div>
           <div v-else class="company-logo not-found">
-            <span>not found</span>
+            <span>n/a</span>
           </div>
           <div class="job-company">
             <h5>{{job.company}}</h5>
-            <p>{{job.location}}</p>
+            <p>
+              <i class="material-icons">public</i>
+              {{job.location}}
+            </p>
           </div>
         </div>
 
@@ -91,6 +99,30 @@ export default {
 <style lang="scss" scoped>
 .job {
   flex: 1;
+  margin-bottom: 96px;
+
+  .go-back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    i {
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+      margin-right: 15px;
+    }
+  }
+}
+
+.job-apply {
+  width: 100%;
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  margin-top: 16px;
 }
 
 .job-heading {
@@ -102,6 +134,19 @@ export default {
     font-weight: 700;
     margin: 0 18px 0 0;
     color: $primary;
+  }
+}
+
+.job-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: $secondary;
+  display: flex;
+  align-items: center;
+  margin: 10px 0 32px;
+
+  i {
+    margin-right: 8px;
   }
 }
 
@@ -131,14 +176,26 @@ export default {
   .job-company {
     h5 {
       font-size: 18px;
-      font-weight: 400;
+      font-weight: 700;
       margin-bottom: 10px;
+      color: $primary;
     }
 
     p {
       font-size: 12px;
       font-weight: 500;
+      color: $secondary;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 8px;
+      }
     }
   }
+}
+
+.job-desc {
+  color: $primary;
 }
 </style>
