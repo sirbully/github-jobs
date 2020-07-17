@@ -4,8 +4,15 @@
       <mdb-row class="w-100 justify-content-center">
         <mdb-col col="12" class="search-input-wrap search">
           <i class="material-icons">work_outline</i>
-          <input type="text" name="search" placeholder="Title, company, expertise or benefits" />
-          <mdb-btn class="color-info search-btn">Search</mdb-btn>
+          <form @submit.stop.prevent="handleSubmit">
+            <input
+              v-model="search"
+              type="text"
+              name="search"
+              placeholder="Title, company, expertise or benefits"
+            />
+            <mdb-btn type="submit" class="color-info search-btn">Search</mdb-btn>
+          </form>
         </mdb-col>
       </mdb-row>
     </div>
@@ -13,17 +20,24 @@
     <div class="job-list-wrap">
       <mdb-row>
         <mdb-col sm="4" class="filter-wrap">
-          <checkbox v-model="fullTime" name="Full time" />
+          <checkbox v-model="fullTime" @input="handleSubmit" name="Full time" />
           <h6>Location</h6>
           <div class="search-input-wrap location">
             <i class="material-icons">public</i>
-            <input type="text" name="location" placeholder="City, state, zip code or country" />
+            <form @submit.stop.prevent="handleSubmit">
+              <input
+                v-model="location"
+                type="text"
+                name="location"
+                placeholder="City, state, zip code or country"
+              />
+            </form>
           </div>
           <div class="filter-location">
-            <checkbox v-model="london" name="London" />
-            <checkbox v-model="amsterdam" name="Amsterdam" />
-            <checkbox v-model="newYork" name="New York" />
-            <checkbox v-model="berlin" name="Berlin" />
+            <checkbox v-model="remote" @input="handleSubmit" name="Remote" />
+            <checkbox v-model="amsterdam" @input="handleSubmit" name="Amsterdam" />
+            <checkbox v-model="germany" @input="handleSubmit" name="Germany" />
+            <checkbox v-model="newYork" @input="handleSubmit" name="New York" />
           </div>
         </mdb-col>
 
@@ -82,10 +96,32 @@ export default {
   data() {
     return {
       loading: false,
-      show: false,
       jobs: [],
       jobPages: [],
+      search: '',
+      location: '',
     };
+  },
+  computed: {
+    queryParams() {
+      const queryStr = [];
+      const loc = [];
+
+      if (this.search) queryStr.push(`search=${this.search}`);
+
+      if (this.location) loc.push(this.location);
+      if (this.remote) loc.push('remote');
+      if (this.amsterdam) loc.push('amsterdam');
+      if (this.germany) loc.push('germany');
+      if (this.newYork) loc.push('new+york');
+
+      if (loc.length !== 0) queryStr.push(`location=${loc.join(',')}`);
+
+      if (this.fullTime) queryStr.push('full_time=true');
+
+      if (queryStr) return queryStr.join('&');
+      return '';
+    },
   },
   created() {
     this.fetchJobs();
@@ -93,31 +129,36 @@ export default {
   methods: {
     fetchJobs() {
       this.loading = true;
-      fetch('https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json', {
+      const noCors = 'https://cors-anywhere.herokuapp.com/';
+      const API = 'https://jobs.github.com/positions.json?';
+
+      fetch(`${noCors}${API}${this.queryParams}`, {
         headers: {
           Origin: null,
         },
       }).then((response) => response.json())
         .then((data) => {
           this.loading = false;
-          this.show = true;
           this.jobs = data;
         });
     },
+    handleSubmit() {
+      this.fetchJobs();
+    },
     goToPage(jobPages) {
       this.jobPages = jobPages;
-
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     },
   },
   setup() {
     const fullTime = ref(false);
-    const london = ref(false);
+    const remote = ref(false);
     const amsterdam = ref(false);
+    const germany = ref(false);
     const newYork = ref(false);
-    const berlin = ref(false);
+
     return {
-      fullTime, london, amsterdam, newYork, berlin,
+      fullTime, remote, amsterdam, germany, newYork,
     };
   },
 };
@@ -150,7 +191,6 @@ export default {
 .search-input-wrap {
   padding: 4px;
   display: flex;
-  justify-content: center;
   align-items: center;
   background: #fff;
   border-radius: 4px;
@@ -172,13 +212,18 @@ export default {
     color: $secondary;
   }
 
+  form {
+    flex: 1;
+    display: flex;
+  }
+
   input {
     flex: 1;
     margin-right: 10px;
     font-size: 12px;
     font-family: "Robot", sans-serif;
     border: none;
-    color: $secondary;
+    color: $primary;
 
     &::placeholder {
       color: $secondary;
