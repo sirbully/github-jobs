@@ -1,4 +1,4 @@
-# Github Jobs
+# Github Jobs Challenge (VueJS)
 
 [Dev Challenges](https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps)
 
