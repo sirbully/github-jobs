@@ -4,15 +4,14 @@
       <mdb-row class="w-100 justify-content-center">
         <mdb-col col="12" class="search-input-wrap search">
           <i class="material-icons">work_outline</i>
-          <form @submit.stop.prevent="handleSubmit">
-            <input
-              v-model="search"
-              type="text"
-              name="search"
-              placeholder="Title, company, expertise or benefits"
-            />
-            <mdb-btn type="submit" class="color-info search-btn">Search</mdb-btn>
-          </form>
+          <input
+            v-model="search"
+            type="text"
+            name="search"
+            placeholder="Title, company, expertise or benefits"
+            @keyup.enter="handleSubmit"
+          />
+          <mdb-btn class="color-info search-btn" @click="handleSubmit">Search</mdb-btn>
         </mdb-col>
       </mdb-row>
     </div>

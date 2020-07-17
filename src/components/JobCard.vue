@@ -143,6 +143,8 @@ export default {
 
 @media (max-width: 575px) {
   .job-position {
+    margin-bottom: 38px;
+
     h4 {
       font-size: 16px;
     }

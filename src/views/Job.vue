@@ -99,7 +99,6 @@ export default {
 <style lang="scss" scoped>
 .job {
   flex: 1;
-  margin-bottom: 96px;
 
   .go-back {
     display: flex;
@@ -123,16 +122,18 @@ export default {
   font-weight: 500;
   overflow-wrap: break-word;
   margin-top: 16px;
+  margin-bottom: 36px;
 }
 
 .job-heading {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   h2 {
     font-size: 24px;
     font-weight: 700;
-    margin: 0 18px 0 0;
+    margin-right: 18px;
     color: $primary;
   }
 }

@@ -13,10 +13,4 @@
   border: 1px solid $primary;
   border-radius: 4px;
 }
-
-@media (max-width: 575px) {
-  .pill {
-    margin-bottom: 38px;
-  }
-}
 </style>
