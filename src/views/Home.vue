@@ -104,17 +104,14 @@ export default {
   computed: {
     queryParams() {
       const queryStr = [];
-      const loc = [];
 
       if (this.search) queryStr.push(`search=${this.search.split(' ').join('+')}`);
 
-      if (this.location) loc.push(this.location.split(' ').join('+'));
-      if (this.remote) loc.push('remote');
-      if (this.amsterdam) loc.push('amsterdam');
-      if (this.germany) loc.push('germany');
-      if (this.newYork) loc.push('new+york');
-
-      if (loc.length !== 0) queryStr.push(`location=${loc.join(',')}`);
+      if (this.location) queryStr.push(`location=${this.location.split(' ').join('+')}`);
+      if (this.remote) queryStr.push('location=remote');
+      if (this.amsterdam) queryStr.push('location=amsterdam');
+      if (this.germany) queryStr.push('location=germany');
+      if (this.newYork) queryStr.push('location=new+york');
 
       if (this.fullTime) queryStr.push('full_time=true');
 
