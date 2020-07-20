@@ -33,10 +33,30 @@
             </form>
           </div>
           <div class="filter-location">
-            <checkbox v-model="remote" @input="handleSubmit" name="Remote" />
-            <checkbox v-model="amsterdam" @input="handleSubmit" name="Amsterdam" />
-            <checkbox v-model="germany" @input="handleSubmit" name="Germany" />
-            <checkbox v-model="newYork" @input="handleSubmit" name="New York" />
+            <radio
+              name="location"
+              label="Remote"
+              :value="selectedLocation"
+              @toggle="changeSelectedLocation"
+            />
+            <radio
+              name="location"
+              label="Amsterdam"
+              :value="selectedLocation"
+              @toggle="changeSelectedLocation"
+            />
+            <radio
+              name="location"
+              label="Berlin"
+              :value="selectedLocation"
+              @toggle="changeSelectedLocation"
+            />
+            <radio
+              name="location"
+              label="New York"
+              :value="selectedLocation"
+              @toggle="changeSelectedLocation"
+            />
           </div>
         </mdb-col>
 
@@ -75,6 +95,7 @@
 <script>
 import { ref } from '@vue/composition-api';
 import Checkbox from '@/components/Checkbox.vue';
+import Radio from '@/components/Radio.vue';
 import JobCard from '@/components/JobCard.vue';
 import Pagination from '@/components/Pagination.vue';
 
@@ -88,6 +109,7 @@ export default {
     mdbRow,
     mdbCol,
     mdbBtn,
+    Radio,
     Checkbox,
     JobCard,
     Pagination,
@@ -99,6 +121,7 @@ export default {
       jobPages: [],
       search: '',
       location: '',
+      selectedLocation: '',
     };
   },
   computed: {
@@ -108,10 +131,7 @@ export default {
       if (this.search) queryStr.push(`search=${this.search.split(' ').join('+')}`);
 
       if (this.location) queryStr.push(`location=${this.location.split(' ').join('+')}`);
-      if (this.remote) queryStr.push('location=remote');
-      if (this.amsterdam) queryStr.push('location=amsterdam');
-      if (this.germany) queryStr.push('location=germany');
-      if (this.newYork) queryStr.push('location=new+york');
+      if (this.selectedLocation) queryStr.push(`location=${this.selectedLocation.split(' ').join('+')}`);
 
       if (this.fullTime) queryStr.push('full_time=true');
 
@@ -140,6 +160,11 @@ export default {
     },
     handleSubmit() {
       this.fetchJobs();
+      this.selectedLocation = '';
+    },
+    changeSelectedLocation(newLocation) {
+      this.selectedLocation = newLocation;
+      this.handleSubmit();
     },
     goToPage(jobPages) {
       this.jobPages = jobPages;
@@ -148,14 +173,7 @@ export default {
   },
   setup() {
     const fullTime = ref(false);
-    const remote = ref(false);
-    const amsterdam = ref(false);
-    const germany = ref(false);
-    const newYork = ref(false);
-
-    return {
-      fullTime, remote, amsterdam, germany, newYork,
-    };
+    return { fullTime };
   },
 };
 </script>
