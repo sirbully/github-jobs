@@ -1,4 +1,4 @@
-# Github Jobs Challenge (VueJS)
+# Github Jobs Challenge (Vue 2)
 
 Available on [Dev Challenges](https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps)
 
